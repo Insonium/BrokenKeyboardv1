@@ -1,4 +1,4 @@
-package htmlTranscripts;
+package org.brokenkeyboard.htmlTranscripts;
 
 import java.awt.*;
 import java.util.regex.Matcher;

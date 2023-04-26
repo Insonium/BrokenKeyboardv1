@@ -4,10 +4,22 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.commands.Command;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import org.brokenkeyboard.automation.AutoCompleteSetup;
+import org.brokenkeyboard.automation.Autodelete;
+import org.brokenkeyboard.automation.WillkommensNachricht;
+import org.brokenkeyboard.setup.SetupAutodelete;
+import org.brokenkeyboard.setup.SetupRules;
+import org.brokenkeyboard.setup.SetupTicketSupport;
+import org.brokenkeyboard.setup.SetupVerify;
+import org.jetbrains.annotations.NotNull;
 
 import javax.security.auth.login.LoginException;
 
@@ -35,6 +47,15 @@ public class Main extends ListenerAdapter {
 
         builder.addEventListeners(new Main()); //OnReady
 
+        builder.addEventListeners(new AutoCompleteSetup()); //Automation
+        builder.addEventListeners(new WillkommensNachricht());
+        builder.addEventListeners(new Autodelete());
+
+        builder.addEventListeners(new SetupAutodelete()); //Setup
+        builder.addEventListeners(new SetupRules());
+        builder.addEventListeners(new SetupVerify());
+        builder.addEventListeners(new SetupTicketSupport());
+
 
 
 
@@ -50,6 +71,16 @@ public class Main extends ListenerAdapter {
                 "                                                                          __/ |            \n" +
                 "                                                                         |___/             \n");
         System.out.println("Der Bot ist nun online!");
+    }
 
+
+
+    @Override
+    public void onReady(@NotNull ReadyEvent event) {
+        System.out.println("Commands aktiviert");
+            event.getJDA().getGuilds().get(1).updateCommands().addCommands(
+                    Commands.slash("setup", "Sendet dir Reaktionroles, Ticketembeds und vieles mehr!")
+                            .addOption(OptionType.STRING, "type", "Wähle aus, was gesendet werden soll!", true, true)
+            ).queue();
     }
 }

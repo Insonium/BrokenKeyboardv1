@@ -1,4 +1,4 @@
-package htmlTranscripts;
+package org.brokenkeyboard.htmlTranscripts;
 
 //import lombok.var;
 import net.dv8tion.jda.api.entities.ISnowflake;
