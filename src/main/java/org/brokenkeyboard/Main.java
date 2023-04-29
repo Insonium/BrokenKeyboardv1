@@ -17,6 +17,7 @@ import org.brokenkeyboard.automation.Autodelete;
 import org.brokenkeyboard.automation.OnReady;
 import org.brokenkeyboard.automation.WillkommensNachricht;
 import org.brokenkeyboard.commands.ClearCommandSlash;
+import org.brokenkeyboard.commands.PingCommandSlash;
 import org.brokenkeyboard.setup.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,6 +59,7 @@ public class Main extends ListenerAdapter {
         builder.addEventListeners(new SetupReactionroles());
 
         builder.addEventListeners(new ClearCommandSlash());// commands
+        builder.addEventListeners(new PingCommandSlash());
 
 
 
@@ -83,7 +85,8 @@ public class Main extends ListenerAdapter {
                     Commands.slash("setup", "Sendet dir Reaktionroles, Ticketembeds und vieles mehr!")
                             .addOption(OptionType.STRING, "type", "Wähle aus, was gesendet werden soll!", true, true),
                     Commands.slash("clear", "Löscht eine gewisse Anzahl von Nachrichten!")
-                            .addOption(OptionType.INTEGER, "anzahl", "Gebe an, wie viele Nachrichten du löschen möchtest!", true)
+                            .addOption(OptionType.INTEGER, "anzahl", "Gebe an, wie viele Nachrichten du löschen möchtest!", true),
+                    Commands.slash("ping", "Bekomme den Ping des Bots angezeigt!")
             ).queue();
     }
 }
