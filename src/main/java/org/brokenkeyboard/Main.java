@@ -14,11 +14,9 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.brokenkeyboard.automation.AutoCompleteSetup;
 import org.brokenkeyboard.automation.Autodelete;
+import org.brokenkeyboard.automation.OnReady;
 import org.brokenkeyboard.automation.WillkommensNachricht;
-import org.brokenkeyboard.setup.SetupAutodelete;
-import org.brokenkeyboard.setup.SetupRules;
-import org.brokenkeyboard.setup.SetupTicketSupport;
-import org.brokenkeyboard.setup.SetupVerify;
+import org.brokenkeyboard.setup.*;
 import org.jetbrains.annotations.NotNull;
 
 import javax.security.auth.login.LoginException;
@@ -46,6 +44,7 @@ public class Main extends ListenerAdapter {
 
 
         builder.addEventListeners(new Main()); //OnReady
+        //builder.addEventListeners(new OnReady());// Gibt noch Nullpointexeption Error
 
         builder.addEventListeners(new AutoCompleteSetup()); //Automation
         builder.addEventListeners(new WillkommensNachricht());
@@ -55,6 +54,7 @@ public class Main extends ListenerAdapter {
         builder.addEventListeners(new SetupRules());
         builder.addEventListeners(new SetupVerify());
         builder.addEventListeners(new SetupTicketSupport());
+        builder.addEventListeners(new SetupReactionroles());
 
 
 

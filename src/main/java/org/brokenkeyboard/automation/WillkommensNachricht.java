@@ -43,7 +43,7 @@ public class WillkommensNachricht extends ListenerAdapter {
         embedBuilder.setColor(new Color(86, 98, 248));
         embedBuilder.setThumbnail("https://media.discordapp.net/attachments/871342424981663765/1073683523443109922/wavingHand.png?width=676&height=676");
 
-        event.getGuild().getTextChannelById(Config.chatId).sendMessageEmbeds(embedBuilder.build()).queue();
+        event.getGuild().getTextChannelById(Config.channelChatId).sendMessageEmbeds(embedBuilder.build()).queue();
 
 
 

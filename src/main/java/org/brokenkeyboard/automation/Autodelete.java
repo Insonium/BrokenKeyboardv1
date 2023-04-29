@@ -9,7 +9,7 @@ public class Autodelete extends ListenerAdapter {
 
     public void onMessageReceived(MessageReceivedEvent event){
 
-        if (event.getMessage().getChannel().getId().equals(Config.botchatId)){
+        if (event.getMessage().getChannel().getId().equals(Config.channelBotchatId)){
             if (!event.getMessage().getId().equals(Config.botChatMessageId)){
                 Message message = event.getMessage();
                 long waitTime = 5 * 60 * 1000; // 5 Minuten in Millisekunden
