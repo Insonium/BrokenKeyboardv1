@@ -16,6 +16,7 @@ import org.brokenkeyboard.automation.AutoCompleteSetup;
 import org.brokenkeyboard.automation.Autodelete;
 import org.brokenkeyboard.automation.OnReady;
 import org.brokenkeyboard.automation.WillkommensNachricht;
+import org.brokenkeyboard.commands.ClearCommandSlash;
 import org.brokenkeyboard.setup.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,7 +57,7 @@ public class Main extends ListenerAdapter {
         builder.addEventListeners(new SetupTicketSupport());
         builder.addEventListeners(new SetupReactionroles());
 
-
+        builder.addEventListeners(new ClearCommandSlash());// commands
 
 
 
@@ -80,7 +81,9 @@ public class Main extends ListenerAdapter {
         System.out.println("Commands aktiviert");
             event.getJDA().getGuilds().get(1).updateCommands().addCommands(
                     Commands.slash("setup", "Sendet dir Reaktionroles, Ticketembeds und vieles mehr!")
-                            .addOption(OptionType.STRING, "type", "Wähle aus, was gesendet werden soll!", true, true)
+                            .addOption(OptionType.STRING, "type", "Wähle aus, was gesendet werden soll!", true, true),
+                    Commands.slash("clear", "Löscht eine gewisse Anzahl von Nachrichten!")
+                            .addOption(OptionType.INTEGER, "anzahl", "Gebe an, wie viele Nachrichten du löschen möchtest!", true)
             ).queue();
     }
 }
