@@ -1,5 +1,6 @@
 package org.brokenkeyboard;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -19,6 +20,8 @@ import org.brokenkeyboard.automation.WillkommensNachricht;
 import org.brokenkeyboard.commands.ClearCommandSlash;
 import org.brokenkeyboard.commands.PingCommandSlash;
 import org.brokenkeyboard.commands.ViewCommandSlash;
+import org.brokenkeyboard.modals.EditEmbed;
+import org.brokenkeyboard.modals.EmbedModal;
 import org.brokenkeyboard.setup.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,9 +62,13 @@ public class Main extends ListenerAdapter {
         builder.addEventListeners(new SetupTicketSupport());
         builder.addEventListeners(new SetupReactionroles());
 
-        builder.addEventListeners(new ClearCommandSlash());// commands
+        builder.addEventListeners(new ClearCommandSlash()); //commands
         builder.addEventListeners(new PingCommandSlash());
         builder.addEventListeners(new ViewCommandSlash());
+
+        builder.addEventListeners(new EmbedModal()); //modals
+
+        builder.addEventListeners(new EditEmbed()); //contextmenu
 
 
 
@@ -90,7 +97,11 @@ public class Main extends ListenerAdapter {
                             .addOption(OptionType.INTEGER, "anzahl", "Gebe an, wie viele Nachrichten du löschen möchtest!", true),
                     Commands.slash("ping", "Bekomme den Ping des Bots angezeigt!"),
                     Commands.slash("view", "Sehe das Profil eines Nutzers!").setGuildOnly(false)
-                            .addOption(OptionType.USER, "user", "Wähle einen Nutzer aus!", true)
+                            .addOption(OptionType.USER, "user", "Wähle einen Nutzer aus!", true),
+                    Commands.slash("embed", "Sende ein Embed in diesen Channel!"),
+
+
+                    Commands.context(Command.Type.MESSAGE, "Edit Embed")
             ).queue();
     }
 }
